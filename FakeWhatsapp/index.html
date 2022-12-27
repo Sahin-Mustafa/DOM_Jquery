@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link
+      href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      /* html,
+      body {
+        height: 100%;
+        width: 100%;
+      } */
+      #messages-container {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
+      .rotate-icon {
+        transform: rotateY(180deg);
+      }
+
+      .blur {
+        box-shadow: 0.5px 2px 10px #c1cbcd;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container w-100 h-100 offset-2" style="margin-top: 100px">
+      <h2>Fake Whatsapp</h2>
+      <hr />
+      <div class="row">
+        <div
+          class="col-md-4 col-12 me-2 border border-2 border-secondary rounded-top p-0 w-75"
+        >
+          <div
+            id="messages-container"
+            class="p-2 pt-2 ps-5 bg-dark"
+            style="height: 600px; overflow-y: auto"
+          ></div>
+          <div class="btn-group w-100">
+            <textarea
+              name=""
+              id="message-content"
+              class="m-0 ps-1 rounded-top w-100 me-1"
+            ></textarea>
+            <button
+              onclick="add()"
+              id="btnsend"
+              class="m-0 p-lg-1 bg-success border-0 rounded-top text-white"
+            >
+              Send
+            </button>
+          </div>
+        </div>
+        <!-- <div class="col-4 bg-info">
+          <div class="message bg-warning m-3 p-2 rounded-3">
+            <p class="message-container m-0">deneme 1,2,3</p>
+            <p class="text-end m-0">6:25pm</p>
+          </div>
+          <div class="message bg-warning m-3 p-2 rounded-3">
+            <p class="message-container m-0">deneme 1,2,3</p>
+            <p class="text-end m-0">6:25pm</p>
+          </div>
+          <div class="message bg-warning m-3 p-2 rounded-3">
+            <p class="message-container m-0">deneme 1,2,3</p>
+            <p class="text-end m-0">6:25pm</p>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+      integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+    />
+    <script>
+      toastr.options = {
+        closeButton: true,
+        debug: false,
+        newestOnTop: false,
+        progressBar: true,
+        positionClass: "toast-top-right",
+        preventDuplicates: false,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        timeOut: "1000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut",
+      };
+      var messagesContainer = $("#messages-container");
+      function like(i) {
+        $(i).next().removeClass("text-danger");
+        $(i).hasClass("text-warning")
+          ? $(i).removeClass("text-warning")
+          : $(i).addClass("text-warning");
+      }
+      function dislike(i) {
+        $(i).prev().removeClass("text-warning");
+        $(i).hasClass("text-danger")
+          ? $(i).removeClass("text-danger")
+          : $(i).addClass("text-danger");
+      }
+      jQuery(function ($) {
+        $(".div").on("scroll", function () {
+          if (
+            $(this).scrollTop() + $(this).innerHeight() >=
+            $(this)[0].scrollHeight
+          ) {
+            alert("End of DIV is reached!");
+          }
+        });
+      });
+      $(document).keydown(function (e) {
+        if (e.which == 13 && e.ctrlKey) {
+          add();
+        }
+      });
+
+      function add() {
+        var date = new Date();
+        var minute =
+          date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+        var message = $("#message-content").val();
+        var messageBody = `
+            <div class="message-box bg-success mb-3 p-1 rounded-2 blur" >
+              <div class="d-flex">
+                <div class="justify-content-between me-2">
+                    <i onclick="like(this)" class="fa-solid fa-thumbs-up"></i>
+                    <i onclick="dislike(this)" class="fa-solid fa-thumbs-down rotate-icon"></i>                
+                </div>
+
+                <p class="message text-white m-0">${message}</p>
+              </div>
+
+              <p class="text-end text-white m-0">${date.getHours()}:${minute}</p>
+            </div>
+        `;
+        // messagesContainer.insertBefore(messageBody, parent.lastChild);
+        messagesContainer.prepend(messageBody);
+        $("#message-content").val("");
+        toastr["success"](message, "Mesaj Gönderildi");
+      }
+    </script>
+  </body>
+</html>

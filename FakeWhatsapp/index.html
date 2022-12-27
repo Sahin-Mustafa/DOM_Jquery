@@ -25,11 +25,6 @@
       referrerpolicy="no-referrer"
     />
     <style>
-      /* html,
-      body {
-        height: 100%;
-        width: 100%;
-      } */
       #messages-container {
         display: flex;
         flex-direction: column-reverse;
@@ -73,20 +68,6 @@
             </button>
           </div>
         </div>
-        <!-- <div class="col-4 bg-info">
-          <div class="message bg-warning m-3 p-2 rounded-3">
-            <p class="message-container m-0">deneme 1,2,3</p>
-            <p class="text-end m-0">6:25pm</p>
-          </div>
-          <div class="message bg-warning m-3 p-2 rounded-3">
-            <p class="message-container m-0">deneme 1,2,3</p>
-            <p class="text-end m-0">6:25pm</p>
-          </div>
-          <div class="message bg-warning m-3 p-2 rounded-3">
-            <p class="message-container m-0">deneme 1,2,3</p>
-            <p class="text-end m-0">6:25pm</p>
-          </div>
-        </div> -->
       </div>
     </div>
     <script
@@ -123,41 +104,47 @@
         debug: false,
         newestOnTop: false,
         progressBar: true,
-        positionClass: "toast-top-right",
+        positionClass: 'toast-top-right',
         preventDuplicates: false,
         onclick: null,
-        showDuration: "300",
-        hideDuration: "1000",
-        timeOut: "1000",
-        extendedTimeOut: "1000",
-        showEasing: "swing",
-        hideEasing: "linear",
-        showMethod: "fadeIn",
-        hideMethod: "fadeOut",
+        showDuration: '300',
+        hideDuration: '1000',
+        timeOut: '1000',
+        extendedTimeOut: '1000',
+        showEasing: 'swing',
+        hideEasing: 'linear',
+        showMethod: 'fadeIn',
+        hideMethod: 'fadeOut',
       };
-      var messagesContainer = $("#messages-container");
+      var messagesContainer = $('#messages-container');
+
+      //like and dislike change background color when click event
       function like(i) {
-        $(i).next().removeClass("text-danger");
-        $(i).hasClass("text-warning")
-          ? $(i).removeClass("text-warning")
-          : $(i).addClass("text-warning");
+        $(i).next().removeClass('text-danger');
+        $(i).hasClass('text-warning')
+          ? $(i).removeClass('text-warning')
+          : $(i).addClass('text-warning');
       }
       function dislike(i) {
-        $(i).prev().removeClass("text-warning");
-        $(i).hasClass("text-danger")
-          ? $(i).removeClass("text-danger")
-          : $(i).addClass("text-danger");
+        $(i).prev().removeClass('text-warning');
+        $(i).hasClass('text-danger')
+          ? $(i).removeClass('text-danger')
+          : $(i).addClass('text-danger');
       }
+
+      //scroll bar for message page
       jQuery(function ($) {
-        $(".div").on("scroll", function () {
+        $('.div').on('scroll', function () {
           if (
             $(this).scrollTop() + $(this).innerHeight() >=
             $(this)[0].scrollHeight
           ) {
-            alert("End of DIV is reached!");
+            alert('End of DIV is reached!');
           }
         });
       });
+
+      //ctrl+enter event
       $(document).keydown(function (e) {
         if (e.which == 13 && e.ctrlKey) {
           add();
@@ -168,7 +155,7 @@
         var date = new Date();
         var minute =
           date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
-        var message = $("#message-content").val();
+        var message = $('#message-content').val();
         var messageBody = `
             <div class="message-box bg-success mb-3 p-1 rounded-2 blur" >
               <div class="d-flex">
@@ -183,10 +170,10 @@
               <p class="text-end text-white m-0">${date.getHours()}:${minute}</p>
             </div>
         `;
-        // messagesContainer.insertBefore(messageBody, parent.lastChild);
+
         messagesContainer.prepend(messageBody);
-        $("#message-content").val("");
-        toastr["success"](message, "Mesaj Gönderildi");
+        $('#message-content').val('');
+        toastr['success'](message, 'Mesaj Gönderildi');
       }
     </script>
   </body>
